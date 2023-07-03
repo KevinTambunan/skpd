@@ -18,6 +18,25 @@ class AplikasiController extends Controller
         $aplikasis = Aplikasi::where("user_id", Auth::user()->id)->get();
         return view('user.aplikasi', compact(['aplikasis']));
     }
+    public function index_verifikator()
+    {
+        $aplikasis = Aplikasi::all();
+        return view('verifikator.aplikasi', compact(['aplikasis']));
+    }
+    public function setuju($id)
+    {
+        Aplikasi::where('id', $id)->update([
+            'status' => 'diterima'
+        ]);
+        return redirect('/aplikasi_verifikator');
+    }
+    public function ditolak($id)
+    {
+        Aplikasi::where('id', $id)->update([
+            'status' => 'ditolak'
+        ]);
+        return redirect('/aplikasi_verifikator');
+    }
 
     /**
      * Show the form for creating a new resource.

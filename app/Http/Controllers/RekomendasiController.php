@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hosting;
+use App\Models\Rekomendasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HostingController extends Controller
+class RekomendasiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,27 +15,12 @@ class HostingController extends Controller
      */
     public function index()
     {
-        $hostings = Hosting::where('user_id', Auth::user()->id)->get();
-        return view('user.hosting', compact(['hostings']));
+        $rekomendasis = Rekomendasi::where('user_id', Auth::user()->id)->get();
+        return view('user.rekomendasi', compact(['rekomendasis']));
     }
     public function index_verifikator()
     {
-        $hostings = Hosting::all();
-        return view('verifikator.hosting', compact(['hostings']));
-    }
-    public function setuju($id)
-    {
-        Hosting::where('id', $id)->update([
-            'status' => 'diterima'
-        ]);
-        return redirect('/hosting_verifikator');
-    }
-    public function ditolak($id)
-    {
-        Hosting::where('id', $id)->update([
-            'status' => 'ditolak'
-        ]);
-        return redirect('/hosting_verifikator');
+        return view('user.rekomendasi');
     }
 
     /**
@@ -45,7 +30,7 @@ class HostingController extends Controller
      */
     public function create()
     {
-        return view('user.hosting-create');
+        return view('user.rekomendasi-create');
     }
 
     /**
@@ -57,36 +42,28 @@ class HostingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_aplikasi' => 'required',
-            'kebutuhan_hosting' => 'required',
-            'usulan_sub_domain' => 'required',
             'nama_pemohon' => 'required',
             'nip_pemohon' => 'required',
             'nama_perangkat_daerah' => 'required',
             'jabatan_pemohon' => 'required',
             'no_telp_pemohon' => 'required',
             'email_pemohon' => 'required',
-            'nama_pj' => 'required',
-            'nip_pj' => 'required',
-            'jabatan_pj' => 'required',
-            'no_telp_pj' => 'required',
-            'email_pj' => 'required',
             'user_id' => 'required',
             'status' => 'required',
         ]);
 
-        Hosting::create($validated);
+        Rekomendasi::create($validated);
 
-        return redirect('/hosting');
+        return redirect('/rekomendasi');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Hosting  $hosting
+     * @param  \App\Models\Rekomendasi  $rekomendasi
      * @return \Illuminate\Http\Response
      */
-    public function show(Hosting $hosting)
+    public function show(Rekomendasi $rekomendasi)
     {
         //
     }
@@ -94,10 +71,10 @@ class HostingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Hosting  $hosting
+     * @param  \App\Models\Rekomendasi  $rekomendasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hosting $hosting)
+    public function edit(Rekomendasi $rekomendasi)
     {
         //
     }
@@ -106,10 +83,10 @@ class HostingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Hosting  $hosting
+     * @param  \App\Models\Rekomendasi  $rekomendasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hosting $hosting)
+    public function update(Request $request, Rekomendasi $rekomendasi)
     {
         //
     }
@@ -117,10 +94,10 @@ class HostingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Hosting  $hosting
+     * @param  \App\Models\Rekomendasi  $rekomendasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hosting $hosting)
+    public function destroy(Rekomendasi $rekomendasi)
     {
         //
     }

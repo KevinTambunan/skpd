@@ -49,6 +49,10 @@ class PagesController extends Controller
                 $users = User::where('role', 'user')->get();
                 // dd($users);
                 return view('admin.dashboard', compact(['users']));
+            } else if (Auth::user()->role == "verifikator") {
+                $users = User::where('role', 'user')->get();
+                // dd($users);
+                return view('verifikator.dashboard', compact(['users']));
             } else {
                 return view('user.index');
             }
@@ -62,7 +66,9 @@ class PagesController extends Controller
             $users = User::where('role', 'user');
             return view('admin.dashboard', compact(['users']));
         } else if (Auth::user()->role == "verifikator") {
-            return view('verifikator.dashboard');
+            $users = User::where('role', 'user')->get();
+            // dd($users);
+            return view('verifikator.dashboard', compact(['users']));
         } else {
             return view('user.index');
         }

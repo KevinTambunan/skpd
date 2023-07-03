@@ -13,23 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hostings', function (Blueprint $table) {
+        Schema::create('rekomendasis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('nama_aplikasi');
-            $table->string('kebutuhan_hosting');
-            $table->string('usulan_sub_domain');
             $table->string('nama_pemohon');
             $table->bigInteger('nip_pemohon');
             $table->string('nama_perangkat_daerah');
             $table->string('jabatan_pemohon');
             $table->bigInteger('no_telp_pemohon');
             $table->string('email_pemohon');
-            $table->string('nama_pj');
-            $table->bigInteger('nip_pj');
-            $table->string('jabatan_pj');
-            $table->bigInteger('no_telp_pj');
-            $table->string('email_pj');
             $table->string('status');
 
             $table->foreign('id')->on('users')->references('id');
@@ -44,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hostings');
+        Schema::dropIfExists('rekomendasis');
     }
 };

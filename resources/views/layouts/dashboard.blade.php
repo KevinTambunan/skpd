@@ -179,12 +179,39 @@
                     <div class="sidebar-brand-text mx-3">SKPD</div>
                 </a>
 
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>List Users</span></a>
+                <li class="nav-item mt-3">
+                    <a class="nav-link" href="">
+                        {{-- <i class="fas fa-fw fa-table"></i> --}}
+                        <i class="fa-fw fa-solid fa-gear"></i>
+                        <span>Dashboard</span></a>
                 </li>
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/aplikasi_verifikator">
+                        {{-- <i class="fas fa-fw fa-table"></i> --}}
+                        <i class="fa-fw fa-solid fa-image"></i>
+                        <span>Aplikasi</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/hosting_verifikator">
+                        {{-- <i class="fas fa-fw fa-table"></i> --}}
+                        {{-- <i class="fa-fw fa-solid fa-file"></i> --}}
+                        <i class="fa-fw fa-solid fa-cloud"></i>
+                        <span>Hosting</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/modul">
+                        {{-- <i class="fas fa-fw fa-table"></i> --}}
+                        <i class="fa-fw fa-solid fa-network-wired"></i>
+                        <span>Aduan Jaringan</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rekomendasi">
+                        {{-- <i class="fas fa-fw fa-table"></i> --}}
+                        <i class="fa-fw fa-solid fa-circle-exclamation"></i>
+                        <span>Rekomendasi</span></a>
+                </li>
+
 
             </ul>
             <!-- End of Sidebar -->
@@ -336,13 +363,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="/modul">
                     {{-- <i class="fas fa-fw fa-table"></i> --}}
-                    <i class="fa-fw fa-solid fa-file"></i>
+                    <i class="fa-fw fa-solid fa-network-wired"></i>
                     <span>Aduan Jaringan</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/modul">
+                <a class="nav-link" href="/rekomendasi">
                     {{-- <i class="fas fa-fw fa-table"></i> --}}
-                    <i class="fa-fw fa-solid fa-file"></i>
+                    <i class="fa-fw fa-solid fa-circle-exclamation"></i>
                     <span>Rekomendasi</span></a>
             </li>
 

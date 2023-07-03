@@ -32,6 +32,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'verifikator'])->group(function () {
     // Route::post('/bank/destroy/{id}', [App\Http\Controllers\BankController::class, 'destroy']);
+    // aplikasi
+    Route::get('/aplikasi_verifikator', [App\Http\Controllers\AplikasiController::class, 'index_verifikator']);
+    Route::get('/aplikasi/setuju/{id}', [App\Http\Controllers\AplikasiController::class, 'setuju']);
+    Route::get('/aplikasi/ditolak/{id}', [App\Http\Controllers\AplikasiController::class, 'ditolak']);
+    // Route::post('/create_aplikasi', [App\Http\Controllers\AplikasiController::class, 'store']);
+
+
+    Route::get('/hosting_verifikator', [App\Http\Controllers\HostingController::class, 'index_verifikator']);
+    Route::get('/hosting/setuju/{id}', [App\Http\Controllers\HostingController::class, 'setuju']);
+    Route::get('/hosting/ditolak/{id}', [App\Http\Controllers\HostingController::class, 'ditolak']);
+
+    Route::get('/rekomendasi_verifikator', [App\Http\Controllers\RekomendasiController::class, 'index_verifikator']);
+
 });
 
 Route::middleware(['auth', 'user'])->group(function () {
@@ -41,4 +54,11 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/tambah_aplikasi', [App\Http\Controllers\AplikasiController::class, 'create']);
     Route::post('/create_aplikasi', [App\Http\Controllers\AplikasiController::class, 'store']);
 
+    Route::get('/hosting', [App\Http\Controllers\HostingController::class, 'index']);
+    Route::get('/tambah_hosting', [App\Http\Controllers\HostingController::class, 'create']);
+    Route::post('/create_hosting', [App\Http\Controllers\HostingController::class, 'store']);
+
+    Route::get('/rekomendasi', [App\Http\Controllers\RekomendasiController::class, 'index']);
+    Route::get('/tambah_rekomendasi', [App\Http\Controllers\RekomendasiController::class, 'create']);
+    Route::post('/create_rekomendasi', [App\Http\Controllers\RekomendasiController::class, 'store']);
 });
