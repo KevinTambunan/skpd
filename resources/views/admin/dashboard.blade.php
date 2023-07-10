@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Daftar Bank</h1>
+        <h1 class="h3 mb-2 text-gray-800">Daftar User</h1>
         <p>User yang telah memiliki akun, klik button dibawah untuk menambah user</p>
         <a class="btn btn-primary mb-4" href="/tambah_user">Tambah Akun User</a>
 

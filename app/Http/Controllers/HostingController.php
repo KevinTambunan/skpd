@@ -15,12 +15,12 @@ class HostingController extends Controller
      */
     public function index()
     {
-        $hostings = Hosting::where('user_id', Auth::user()->id)->get();
+        $hostings = Hosting::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
         return view('user.hosting', compact(['hostings']));
     }
     public function index_verifikator()
     {
-        $hostings = Hosting::all();
+        $hostings = Hosting::orderBy('id', 'desc')->get();
         return view('verifikator.hosting', compact(['hostings']));
     }
     public function setuju($id)
@@ -30,10 +30,11 @@ class HostingController extends Controller
         ]);
         return redirect('/hosting_verifikator');
     }
-    public function ditolak($id)
+    public function ditolak(Request $request, $id)
     {
         Hosting::where('id', $id)->update([
-            'status' => 'ditolak'
+            'status' => 'ditolak',
+            'alasan' => $request->alasan
         ]);
         return redirect('/hosting_verifikator');
     }
@@ -73,6 +74,7 @@ class HostingController extends Controller
             'email_pj' => 'required',
             'user_id' => 'required',
             'status' => 'required',
+            'alasan' => 'required',
         ]);
 
         Hosting::create($validated);
@@ -97,9 +99,10 @@ class HostingController extends Controller
      * @param  \App\Models\Hosting  $hosting
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hosting $hosting)
+    public function edit($id)
     {
-        //
+        $hosting = Hosting::where('id', $id)->get()->last();
+        return view('user.hosting-edit', compact(['hosting']));
     }
 
     /**
@@ -109,9 +112,31 @@ class HostingController extends Controller
      * @param  \App\Models\Hosting  $hosting
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hosting $hosting)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama_aplikasi' => 'required',
+            'kebutuhan_hosting' => 'required',
+            'usulan_sub_domain' => 'required',
+            'nama_pemohon' => 'required',
+            'nip_pemohon' => 'required',
+            'nama_perangkat_daerah' => 'required',
+            'jabatan_pemohon' => 'required',
+            'no_telp_pemohon' => 'required',
+            'email_pemohon' => 'required',
+            'nama_pj' => 'required',
+            'nip_pj' => 'required',
+            'jabatan_pj' => 'required',
+            'no_telp_pj' => 'required',
+            'email_pj' => 'required',
+            'user_id' => 'required',
+            'status' => 'required',
+            'alasan' => 'required',
+        ]);
+
+        Hosting::where('id',$id)->update($validated);
+
+        return redirect('/hosting');
     }
 
     /**
@@ -120,8 +145,10 @@ class HostingController extends Controller
      * @param  \App\Models\Hosting  $hosting
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hosting $hosting)
+    public function destroy($id)
     {
-        //
+        Hosting::where('id', $id)->delete();
+
+        return redirect('/hosting');
     }
 }

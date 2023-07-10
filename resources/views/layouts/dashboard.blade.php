@@ -180,7 +180,7 @@
                 </a>
 
                 <li class="nav-item mt-3">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="/">
                         {{-- <i class="fas fa-fw fa-table"></i> --}}
                         <i class="fa-fw fa-solid fa-gear"></i>
                         <span>Dashboard</span></a>
@@ -206,7 +206,7 @@
                         <span>Aduan Jaringan</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/rekomendasi">
+                    <a class="nav-link" href="/rekomendasi_verifikator">
                         {{-- <i class="fas fa-fw fa-table"></i> --}}
                         <i class="fa-fw fa-solid fa-circle-exclamation"></i>
                         <span>Rekomendasi</span></a>
@@ -341,7 +341,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item mt-3">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/">
                     {{-- <i class="fas fa-fw fa-table"></i> --}}
                     <i class="fa-fw fa-solid fa-gear"></i>
                     <span>Home</span></a>

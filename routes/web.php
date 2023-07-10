@@ -35,15 +35,21 @@ Route::middleware(['auth', 'verifikator'])->group(function () {
     // aplikasi
     Route::get('/aplikasi_verifikator', [App\Http\Controllers\AplikasiController::class, 'index_verifikator']);
     Route::get('/aplikasi/setuju/{id}', [App\Http\Controllers\AplikasiController::class, 'setuju']);
-    Route::get('/aplikasi/ditolak/{id}', [App\Http\Controllers\AplikasiController::class, 'ditolak']);
+    // Route::get('/aplikasi/ditolak/{id}', [App\Http\Controllers\AplikasiController::class, 'ditolak']);
+    Route::post('/aplikasi/alasan/create/{id}', [App\Http\Controllers\AplikasiController::class, 'ditolak']);
+
     // Route::post('/create_aplikasi', [App\Http\Controllers\AplikasiController::class, 'store']);
 
 
     Route::get('/hosting_verifikator', [App\Http\Controllers\HostingController::class, 'index_verifikator']);
     Route::get('/hosting/setuju/{id}', [App\Http\Controllers\HostingController::class, 'setuju']);
-    Route::get('/hosting/ditolak/{id}', [App\Http\Controllers\HostingController::class, 'ditolak']);
-
+    // Route::get('/hosting/ditolak/{id}', [App\Http\Controllers\HostingController::class, 'ditolak']);
+    Route::post('/hosting/alasan/create/{id}', [App\Http\Controllers\HostingController::class, 'ditolak']);
+    
+    
     Route::get('/rekomendasi_verifikator', [App\Http\Controllers\RekomendasiController::class, 'index_verifikator']);
+    Route::get('/rekomendasi/setuju/{id}', [App\Http\Controllers\RekomendasiController::class, 'setuju']);
+    Route::post('/rekomendasi/alasan/create/{id}', [App\Http\Controllers\RekomendasiController::class, 'ditolak']);
 
 });
 
@@ -53,12 +59,21 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/aplikasi', [App\Http\Controllers\AplikasiController::class, 'index']);
     Route::get('/tambah_aplikasi', [App\Http\Controllers\AplikasiController::class, 'create']);
     Route::post('/create_aplikasi', [App\Http\Controllers\AplikasiController::class, 'store']);
+    Route::get('/aplikasi/edit/{id}', [App\Http\Controllers\AplikasiController::class, 'edit']);
+    Route::post('/aplikasi/update/{id}', [App\Http\Controllers\AplikasiController::class, 'update']);
+    Route::get('/aplikasi/hapus/{id}', [App\Http\Controllers\AplikasiController::class, 'destroy']);
 
     Route::get('/hosting', [App\Http\Controllers\HostingController::class, 'index']);
     Route::get('/tambah_hosting', [App\Http\Controllers\HostingController::class, 'create']);
     Route::post('/create_hosting', [App\Http\Controllers\HostingController::class, 'store']);
+    Route::get('/hosting/edit/{id}', [App\Http\Controllers\HostingController::class, 'edit']);
+    Route::post('/hosting/update/{id}', [App\Http\Controllers\HostingController::class, 'update']);
+    Route::get('/hosting/hapus/{id}', [App\Http\Controllers\HostingController::class, 'destroy']);
 
     Route::get('/rekomendasi', [App\Http\Controllers\RekomendasiController::class, 'index']);
     Route::get('/tambah_rekomendasi', [App\Http\Controllers\RekomendasiController::class, 'create']);
     Route::post('/create_rekomendasi', [App\Http\Controllers\RekomendasiController::class, 'store']);
+    Route::get('/rekomendasi/edit/{id}', [App\Http\Controllers\RekomendasiController::class, 'edit']);
+    Route::post('/rekomendasi/update/{id}', [App\Http\Controllers\RekomendasiController::class, 'update']);
+    Route::get('/rekomendasi/hapus/{id}', [App\Http\Controllers\RekomendasiController::class, 'destroy']);
 });

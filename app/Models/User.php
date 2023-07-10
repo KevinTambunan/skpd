@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function pemesan(){
         return $this->hasOne(Pemesan::class);
     }
+
+    public function aplikasi(){
+        return $this->hasMany(Aplikasi::class);
+    }
 }

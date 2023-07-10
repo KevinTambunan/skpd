@@ -24,8 +24,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('file');
             $table->string('status');
+            $table->text('alasan');
 
-            $table->foreign('id')->on('users')->references('id');
+            $table->foreign('user_id')->on('users')->references('id');
             $table->timestamps();
         });
     }

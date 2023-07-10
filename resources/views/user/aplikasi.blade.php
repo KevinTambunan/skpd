@@ -19,20 +19,18 @@
                         <thead>
                             <tr>
                                 <th>Nama</th>
-                                <th>NIP</th>
-                                <th>Nama dinas</th>
                                 <th>Email</th>
                                 <th>File</th>
                                 <th>Tanggal dibuat</th>
                                 <th>Status</th>
+                                <th>Alasan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($aplikasis as $aplikasi)
                                 <tr>
                                     <td>{{ $aplikasi->nama }}</td>
-                                    <td>{{ $aplikasi->nip }}</td>
-                                    <td>{{ $aplikasi->nama_dinas }}</td>
                                     <td>{{ $aplikasi->email }}</td>
                                     <td>
                                         <a href="/assets/image/{{ $aplikasi->file }}">{{ $aplikasi->file }}</a>
@@ -48,6 +46,23 @@
                                         @elseif ($aplikasi->status == 'diterima')
                                             <span class="badge badge-pill badge-success">{{ $aplikasi->status }}</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        @if ($aplikasi->status == 'menunggu')
+                                            Masih Menunggu di Konfirmasi
+                                        @elseif ($aplikasi->status == 'ditolak')
+                                                {{$aplikasi->alasan}}
+                                        @elseif ($aplikasi->status == 'diterima')
+                                            Request diterima, silahkan ditunggu
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($aplikasi->status == 'menunggu')
+                                            <a href="/aplikasi/edit/{{ $aplikasi->id }}"
+                                                class="btn btn-success btn-sm rounded"><i class="fa-solid fa-pen"></i></a>
+                                        @endif
+                                        <a href="/aplikasi/hapus/{{ $aplikasi->id }}" class="btn btn-danger btn-sm"><i
+                                                class="fa-solid fa-xmark"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

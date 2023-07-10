@@ -31,8 +31,9 @@ return new class extends Migration
             $table->bigInteger('no_telp_pj');
             $table->string('email_pj');
             $table->string('status');
+            $table->text('alasan');
 
-            $table->foreign('id')->on('users')->references('id');
+            $table->foreign('user_id')->on('users')->references('id');
             $table->timestamps();
         });
     }

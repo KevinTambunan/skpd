@@ -51,9 +51,55 @@
                                     </td>
                                     <td>
                                         @if ($aplikasi->status == 'menunggu')
-                                            <a href="/aplikasi/setuju/{{$aplikasi->id}}" class="btn btn-success btn-sm rounded"><i
-                                                    class="fa-solid fa-check"></i></a>
-                                            <a href="/aplikasi/ditolak/{{$aplikasi->id}}" class="btn btn-danger btn-sm"><i class="fa-solid fa-xmark"></i></a>
+                                            <a href="/aplikasi/setuju/{{ $aplikasi->id }}"
+                                                class="btn btn-success btn-sm rounded"><i class="fa-solid fa-check"></i></a>
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                data-target="#setuju{{ $aplikasi->id }}">
+                                                <i class="fa-solid fa-xmark"></i></a>
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="setuju{{ $aplikasi->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Tolak Permintan
+                                                                Aplikasi</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/aplikasi/alasan/create/{{$aplikasi->id}}" method="post"
+                                                                enctype="multipart/form-data" id="formTambahData">
+                                                                @csrf
+                                                                <h5 class="font-weight-bold">{{ $aplikasi->nama }}</h5>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleFormControlTextarea1">Alasan
+                                                                                Penolakan</label>
+                                                                            <textarea name="alasan" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- <a href="/aplikasi/ditolak/{{ $aplikasi->id }}"
+                                                class="btn btn-danger btn-sm"><i class="fa-solid fa-xmark"></i></a> --}}
                                         @endif
 
                                     </td>

@@ -19,12 +19,12 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form action="/create_aplikasi" method="post" enctype="multipart/form-data" id="formTambahData">
+                        <form action="/aplikasi/update/{{$aplikasi->id}}" method="post" enctype="multipart/form-data" id="formTambahData">
                             @csrf
                             <div class="form-group">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror"
-                                    id="nama" name="nama" value="{{ old('nama') }}">
+                                    id="nama" name="nama" value="{{ $aplikasi->nama }}">
                                 @error('nama')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label for="nip">Nip</label>
                                 <input type="number" class="form-control @error('nip') is-invalid @enderror" id="nip"
-                                    name="nip" value="{{ old('nip') }}">
+                                    name="nip" value="{{ $aplikasi->nip }}">
                                 @error('nip')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label for="nama_dinas">Nama dinas</label>
                                 <input type="text" class="form-control @error('nama_dinas') is-invalid @enderror"
-                                    id="nama_dinas" name="nama_dinas" value="{{ old('nama_dinas') }}">
+                                    id="nama_dinas" name="nama_dinas" value="{{ $aplikasi->nama_dinas }}">
                                 @error('nama_dinas')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 <label for="jabatan">jabatan</label>
                                 <input type="text" class="form-control @error('jabatan') is-invalid @enderror"
-                                    id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
+                                    id="jabatan" name="jabatan" value="{{ $aplikasi->jabatan }}">
                                 @error('jabatan')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label for="no_telp">no telp</label>
                                 <input type="number" class="form-control @error('no_telp') is-invalid @enderror"
-                                    id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
+                                    id="no_telp" name="no_telp" value="{{ $aplikasi->no_telp }}">
                                 @error('no_telp')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -74,7 +74,7 @@
                             <div class="form-group">
                                 <label for="email">email</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    id="email" name="email" value="{{ old('email') }}">
+                                    id="email" name="email" value="{{ $aplikasi->email }}">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -91,7 +91,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Create Request</button>
+                            <button type="submit" class="btn btn-primary btn-block">Update Request</button>
                         </form>
                     </div>
                 </div>

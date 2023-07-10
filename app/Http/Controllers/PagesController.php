@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Aplikasi;
 use App\Models\Bank;
 use App\Models\Homestay;
+use App\Models\Hosting;
 use App\Models\Pesanan;
+use App\Models\Rekomendasi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,15 +49,23 @@ class PagesController extends Controller
     {
         if (Auth::user() != null) {
             if (Auth::user()->role == "admin") {
-                $users = User::where('role', 'user')->get();
+                $users = User::where('role', 'user')->orderBy('id', 'desc')->get();
                 // dd($users);
                 return view('admin.dashboard', compact(['users']));
             } else if (Auth::user()->role == "verifikator") {
-                $users = User::where('role', 'user')->get();
+                $users = User::where('role', 'user')->orderBy('id', 'desc')->get();
                 // dd($users);
-                return view('verifikator.dashboard', compact(['users']));
+                $aplikasi = count(Aplikasi::all());
+                $hosting = count(Hosting::all());
+                // $aduanJaringan = count(::all());
+                $rekomendasi = count(Rekomendasi::all());
+                return view('verifikator.dashboard', compact(['users', 'aplikasi', 'hosting', 'rekomendasi']));
             } else {
-                return view('user.index');
+                $aplikasi = count(Aplikasi::all());
+                $hosting = count(Hosting::all());
+                // $aduanJaringan = count(::all());
+                $rekomendasi = count(Rekomendasi::all());
+                return view('user.index', compact(['aplikasi', 'hosting', 'rekomendasi']));
             }
         } else {
             return view('auth.login');
@@ -63,14 +74,23 @@ class PagesController extends Controller
     public function home()
     {
         if (Auth::user()->role == "admin") {
-            $users = User::where('role', 'user');
+            $users = User::where('role', 'user')->orderBy('id', 'desc')->get();
+            // dd($users);
             return view('admin.dashboard', compact(['users']));
         } else if (Auth::user()->role == "verifikator") {
-            $users = User::where('role', 'user')->get();
+            $users = User::where('role', 'user')->orderBy('id', 'desc')->get();
             // dd($users);
-            return view('verifikator.dashboard', compact(['users']));
+            $aplikasi = count(Aplikasi::all());
+            $hosting = count(Hosting::all());
+            // $aduanJaringan = count(::all());
+            $rekomendasi = count(Rekomendasi::all());
+            return view('verifikator.dashboard', compact(['users', 'aplikasi', 'hosting', 'rekomendasi']));
         } else {
-            return view('user.index');
+            $aplikasi = count(Aplikasi::all());
+            $hosting = count(Hosting::all());
+            // $aduanJaringan = count(::all());
+            $rekomendasi = count(Rekomendasi::all());
+            return view('user.index', compact(['aplikasi', 'hosting', 'rekomendasi']));
         }
     }
 

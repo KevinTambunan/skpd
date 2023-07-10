@@ -15,12 +15,12 @@ class AplikasiController extends Controller
      */
     public function index()
     {
-        $aplikasis = Aplikasi::where("user_id", Auth::user()->id)->get();
+        $aplikasis = Aplikasi::where("user_id", Auth::user()->id)->orderBy('id', 'desc')->get();
         return view('user.aplikasi', compact(['aplikasis']));
     }
     public function index_verifikator()
     {
-        $aplikasis = Aplikasi::all();
+        $aplikasis = Aplikasi::orderBy('id', 'desc')->get();
         return view('verifikator.aplikasi', compact(['aplikasis']));
     }
     public function setuju($id)
@@ -30,10 +30,11 @@ class AplikasiController extends Controller
         ]);
         return redirect('/aplikasi_verifikator');
     }
-    public function ditolak($id)
+    public function ditolak(Request $request, $id)
     {
         Aplikasi::where('id', $id)->update([
-            'status' => 'ditolak'
+            'status' => 'ditolak',
+            'alasan' => $request->alasan,
         ]);
         return redirect('/aplikasi_verifikator');
     }
@@ -63,7 +64,7 @@ class AplikasiController extends Controller
             'jabatan' => 'required',
             'no_telp' => 'required',
             'email' => 'required',
-            'file' => 'required',
+            'file' => 'required|mimes:pdf'
         ]);
 
         // Lakukan tindakan jika validasi berhasil
@@ -72,8 +73,10 @@ class AplikasiController extends Controller
         $tujuan_upload = './assets/image';
         $product_image->move($tujuan_upload, $gambar);
 
+        // dd(Auth::user()->id);
+        $user_id = Auth::user()->id;
         Aplikasi::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $user_id,
             'nama' => $request->nama,
             'nip' => $request->nip,
             'nama_dinas' => $request->nama_dinas,
@@ -82,6 +85,7 @@ class AplikasiController extends Controller
             'email' => $request->email,
             'file' => $gambar,
             'status' => 'menunggu',
+            'alasan' => 'null',
         ]);
 
         return redirect('/aplikasi');
@@ -104,9 +108,10 @@ class AplikasiController extends Controller
      * @param  \App\Models\Aplikasi  $aplikasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aplikasi $aplikasi)
+    public function edit($id)
     {
-        //
+        $aplikasi = Aplikasi::where('id', $id)->get()->last();
+        return view('user.aplikasi-edit', compact(['aplikasi']));
     }
 
     /**
@@ -116,9 +121,40 @@ class AplikasiController extends Controller
      * @param  \App\Models\Aplikasi  $aplikasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aplikasi $aplikasi)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required',
+            'nip' => 'required',
+            'nama_dinas' => 'required',
+            'jabatan' => 'required',
+            'no_telp' => 'required',
+            'email' => 'required',
+            'file' => 'required|mimes:pdf'
+        ]);
+
+        // Lakukan tindakan jika validasi berhasil
+        $product_image = $request->file('file');
+        $gambar = $product_image->getClientOriginalName();
+        $tujuan_upload = './assets/image';
+        $product_image->move($tujuan_upload, $gambar);
+
+        // dd(Auth::user()->id);
+        $user_id = Auth::user()->id;
+        Aplikasi::where('id', $id)->update([
+            'user_id' => $user_id,
+            'nama' => $request->nama,
+            'nip' => $request->nip,
+            'nama_dinas' => $request->nama_dinas,
+            'jabatan' => $request->jabatan,
+            'no_telp' => $request->no_telp,
+            'email' => $request->email,
+            'file' => $gambar,
+            'status' => 'menunggu',
+            'alasan' => 'null',
+        ]);
+
+        return redirect('/aplikasi');
     }
 
     /**
@@ -127,8 +163,9 @@ class AplikasiController extends Controller
      * @param  \App\Models\Aplikasi  $aplikasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aplikasi $aplikasi)
+    public function destroy($id)
     {
-        //
+        Aplikasi::where('id', $id)->delete();
+        return redirect('/aplikasi');
     }
 }

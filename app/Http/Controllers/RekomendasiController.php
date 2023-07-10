@@ -15,12 +15,29 @@ class RekomendasiController extends Controller
      */
     public function index()
     {
-        $rekomendasis = Rekomendasi::where('user_id', Auth::user()->id)->get();
+        $rekomendasis = Rekomendasi::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
         return view('user.rekomendasi', compact(['rekomendasis']));
     }
     public function index_verifikator()
     {
-        return view('user.rekomendasi');
+        $rekomendasis = Rekomendasi::orderBy('id', 'desc')->get();
+        return view('verifikator.rekomendasi', compact(['rekomendasis']));
+    }
+
+    public function setuju($id)
+    {
+        Rekomendasi::where('id', $id)->update([
+            'status' => 'diterima'
+        ]);
+        return redirect('/rekomendasi_verifikator');
+    }
+    public function ditolak(Request $request, $id)
+    {
+        Rekomendasi::where('id', $id)->update([
+            'status' => 'ditolak',
+            'alasan' => $request->alasan
+        ]);
+        return redirect('/rekomendasi_verifikator');
     }
 
     /**
@@ -50,6 +67,7 @@ class RekomendasiController extends Controller
             'email_pemohon' => 'required',
             'user_id' => 'required',
             'status' => 'required',
+            'alasan' => 'required',
         ]);
 
         Rekomendasi::create($validated);
@@ -74,9 +92,10 @@ class RekomendasiController extends Controller
      * @param  \App\Models\Rekomendasi  $rekomendasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rekomendasi $rekomendasi)
+    public function edit($id)
     {
-        //
+        $rekomendasi = Rekomendasi::where('id', $id)->get()->last();
+        return view('user.rekomendasi-edit', compact(['rekomendasi']));
     }
 
     /**
@@ -86,9 +105,23 @@ class RekomendasiController extends Controller
      * @param  \App\Models\Rekomendasi  $rekomendasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rekomendasi $rekomendasi)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama_pemohon' => 'required',
+            'nip_pemohon' => 'required',
+            'nama_perangkat_daerah' => 'required',
+            'jabatan_pemohon' => 'required',
+            'no_telp_pemohon' => 'required',
+            'email_pemohon' => 'required',
+            'user_id' => 'required',
+            'status' => 'required',
+            'alasan' => 'required',
+        ]);
+
+        Rekomendasi::where('id', $id)->update($validated);
+
+        return redirect('/rekomendasi');
     }
 
     /**
@@ -97,8 +130,10 @@ class RekomendasiController extends Controller
      * @param  \App\Models\Rekomendasi  $rekomendasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rekomendasi $rekomendasi)
+    public function destroy($id)
     {
-        //
+        Rekomendasi::where('id', $id)->delete();
+
+        return redirect('/rekomendasi');
     }
 }

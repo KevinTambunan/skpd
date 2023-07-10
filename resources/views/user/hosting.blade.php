@@ -20,11 +20,11 @@
                             <tr>
                                 <th>Nama Aplikasi</th>
                                 <th>Kebutuhan Hosting</th>
-                                <th>Usulan Hosting</th>
                                 <th>Nama Pemohon</th>
-                                <th>Email Pemohon</th>
                                 <th>Tanggal dibuat</th>
                                 <th>Status</th>
+                                <th>Alasan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,11 +32,7 @@
                                 <tr>
                                     <td>{{ $hosting->nama_aplikasi }}</td>
                                     <td>{{ $hosting->kebutuhan_hosting }}</td>
-                                    <td>{{ $hosting->usulan_sub_domain }}</td>
                                     <td>{{ $hosting->nama_pemohon }}</td>
-                                    <td>
-                                        {{ $hosting->email_pemohon }}
-                                    </td>
                                     <td>
                                         <span class="badge badge-primary">{{ $hosting->created_at }}</span>
                                     </td>
@@ -48,6 +44,23 @@
                                         @elseif ($hosting->status == 'diterima')
                                             <span class="badge badge-pill badge-success">{{ $hosting->status }}</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        @if ($hosting->status == 'menunggu')
+                                            Masih Menunggu di Konfirmasi
+                                        @elseif ($hosting->status == 'ditolak')
+                                            {{ $hosting->alasan }}
+                                        @elseif ($hosting->status == 'diterima')
+                                            Request diterima, silahkan ditunggu
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($hosting->status == 'menunggu')
+                                            <a href="/hosting/edit/{{ $hosting->id }}"
+                                                class="btn btn-success btn-sm rounded"><i class="fa-solid fa-pen"></i></a>
+                                        @endif
+                                        <a href="/hosting/hapus/{{ $hosting->id }}" class="btn btn-danger btn-sm"><i
+                                                class="fa-solid fa-xmark"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

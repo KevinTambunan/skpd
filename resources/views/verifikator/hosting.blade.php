@@ -17,7 +17,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Nama Aplikasi</th>
+                                <th>Nama hosting</th>
                                 <th>Kebutuhan Hosting</th>
                                 <th>Usulan Hosting</th>
                                 <th>Nama Pemohon</th>
@@ -53,7 +53,51 @@
                                         @if ($hosting->status == 'menunggu')
                                             <a href="/hosting/setuju/{{$hosting->id}}" class="btn btn-success btn-sm rounded"><i
                                                     class="fa-solid fa-check"></i></a>
-                                            <a href="/hosting/ditolak/{{$hosting->id}}" class="btn btn-danger btn-sm"><i class="fa-solid fa-xmark"></i></a>
+                                            {{-- <a href="/hosting/ditolak/{{$hosting->id}}" class="btn btn-danger btn-sm"><i class="fa-solid fa-xmark"></i></a> --}}
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                data-target="#setuju{{ $hosting->id }}">
+                                                <i class="fa-solid fa-xmark"></i></a>
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="setuju{{ $hosting->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Tolak Permintan
+                                                                hosting</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/hosting/alasan/create/{{$hosting->id}}" method="post"
+                                                                enctype="multipart/form-data" id="formTambahData">
+                                                                @csrf
+                                                                <h5 class="font-weight-bold">{{ $hosting->nama_aplikasi }}</h5>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleFormControlTextarea1">Alasan
+                                                                                Penolakan</label>
+                                                                            <textarea name="alasan" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endif
 
                                     </td>

@@ -19,20 +19,18 @@
                         <thead>
                             <tr>
                                 <th>Nama Pemohon</th>
-                                <th>Nip Pemohon</th>
-                                <th>Nama Perangkat Daerah</th>
                                 <th>Jabatan Pemohon</th>
                                 <th>Email Pemohon</th>
                                 <th>Tanggal dibuat</th>
                                 <th>Status</th>
+                                <th>Alasan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($rekomendasis as $rekomendasi)
                                 <tr>
                                     <td>{{ $rekomendasi->nama_pemohon }}</td>
-                                    <td>{{ $rekomendasi->nip_pemohon }}</td>
-                                    <td>{{ $rekomendasi->nama_perangkat_daerah }}</td>
                                     <td>{{ $rekomendasi->jabatan_pemohon }}</td>
                                     <td>
                                         {{ $rekomendasi->email_pemohon }}
@@ -48,6 +46,24 @@
                                         @elseif ($rekomendasi->status == 'diterima')
                                             <span class="badge badge-pill badge-success">{{ $rekomendasi->status }}</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        @if ($rekomendasi->status == 'menunggu')
+                                            Masih Menunggu di Konfirmasi
+                                        @elseif ($rekomendasi->status == 'ditolak')
+                                            {{ $rekomendasi->alasan }}
+                                        @elseif ($rekomendasi->status == 'diterima')
+                                            Rekomendasi diterima, silahkan ditunggu
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if ($rekomendasi->status == 'menunggu')
+                                            <a href="/rekomendasi/edit/{{ $rekomendasi->id }}"
+                                                class="btn btn-success btn-sm rounded"><i class="fa-solid fa-pen"></i></a>
+                                        @endif
+                                        <a href="/rekomendasi/hapus/{{ $rekomendasi->id }}" class="btn btn-danger btn-sm"><i
+                                                class="fa-solid fa-xmark"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -19,7 +19,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form action="/create_hosting" method="post" enctype="multipart/form-data" id="formTambahData">
+                        <form action="/hosting/update/{{$hosting->id}}" method="post" enctype="multipart/form-data" id="formTambahData">
                             @csrf
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
                             <input type="hidden" name="status" value="menunggu"/>
@@ -31,7 +31,7 @@
                                         <label for="nama_aplikasi">Nama aplikasi</label>
                                         <input type="text"
                                             class="form-control @error('nama_aplikasi') is-invalid @enderror"
-                                            id="nama_aplikasi" name="nama_aplikasi" value="{{ old('nama_aplikasi') }}">
+                                            id="nama_aplikasi" name="nama_aplikasi" value="{{ $hosting->nama_aplikasi }}">
                                         @error('nama_aplikasi')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -59,7 +59,7 @@
                                         <input type="text"
                                             class="form-control @error('usulan_sub_domain') is-invalid @enderror"
                                             id="usulan_sub_domain" name="usulan_sub_domain"
-                                            value="{{ old('usulan_sub_domain') }}">
+                                            value="{{ $hosting->usulan_sub_domain}}">
                                         @error('usulan_sub_domain')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
                                     <div class="form-group">
                                         <label for="nama_pemohon">Nama</label>
                                         <input type="text" class="form-control @error('nama_pemohon') is-invalid @enderror" id="nama_pemohon"
-                                            name="nama_pemohon" value="{{ old('nama_pemohon') }}">
+                                            name="nama_pemohon" value="{{ $hosting->nama_pemohon }}">
                                         @error('nama_pemohon')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
                                     <div class="form-group">
                                         <label for="nip_pemohon">NIP</label>
                                         <input type="number" class="form-control @error('nip_pemohon') is-invalid @enderror" id="nip_pemohon"
-                                            name="nip_pemohon" value="{{ old('nip_pemohon') }}">
+                                            name="nip_pemohon" value="{{ $hosting->nip_pemohon }}">
                                         @error('nip_pemohon')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -99,7 +99,7 @@
                                     <div class="form-group">
                                         <label for="nama_perangkat_daerah">Nama perangkat daerah</label>
                                         <input type="text" class="form-control @error('nama_perangkat_daerah') is-invalid @enderror" id="nama_perangkat_daerah"
-                                            name="nama_perangkat_daerah" value="{{ old('nama_perangkat_daerah') }}">
+                                            name="nama_perangkat_daerah" value="{{ $hosting->nama_perangkat_daerah }}">
                                         @error('nama_perangkat_daerah')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -111,7 +111,7 @@
                                     <div class="form-group">
                                         <label for="jabatan_pemohon">jabatan</label>
                                         <input type="text" class="form-control @error('jabatan_pemohon') is-invalid @enderror" id="jabatan_pemohon"
-                                            name="jabatan_pemohon" value="{{ old('jabatan_pemohon') }}">
+                                            name="jabatan_pemohon" value="{{ $hosting->jabatan_pemohon }}">
                                         @error('jabatan_pemohon')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -123,7 +123,7 @@
                                     <div class="form-group">
                                         <label for="no_telp_pemohon">no telp</label>
                                         <input type="number" class="form-control @error('no_telp_pemohon') is-invalid @enderror" id="no_telp_pemohon"
-                                            name="no_telp_pemohon" value="{{ old('no_telp_pemohon') }}">
+                                            name="no_telp_pemohon" value="{{ $hosting->no_telp_pemohon }}">
                                         @error('no_telp_pemohon')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -135,7 +135,7 @@
                                     <div class="form-group">
                                         <label for="email_pemohon">Email</label>
                                         <input type="email" class="form-control @error('email_pemohon') is-invalid @enderror" id="email_pemohon"
-                                            name="email_pemohon" value="{{ old('email_pemohon') }}">
+                                            name="email_pemohon" value="{{ $hosting->email_pemohon }}">
                                         @error('email_pemohon')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -151,7 +151,7 @@
                                     <div class="form-group">
                                         <label for="nama_pj">Nama</label>
                                         <input type="text" class="form-control @error('nama_pj') is-invalid @enderror" id="nama_pj"
-                                            name="nama_pj" value="{{ old('nama_pj') }}">
+                                            name="nama_pj" value="{{ $hosting->nama_pj }}">
                                         @error('nama_pj')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -163,7 +163,7 @@
                                     <div class="form-group">
                                         <label for="nip_pj">NIP</label>
                                         <input type="number" class="form-control @error('nip_pj') is-invalid @enderror" id="nip_pj"
-                                            name="nip_pj" value="{{ old('nip_pj') }}">
+                                            name="nip_pj" value="{{ $hosting->nip_pj }}">
                                         @error('nip_pj')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -175,7 +175,7 @@
                                     <div class="form-group">
                                         <label for="jabatan_pj">jabatan</label>
                                         <input type="text" class="form-control @error('jabatan_pj') is-invalid @enderror" id="jabatan_pj"
-                                            name="jabatan_pj" value="{{ old('jabatan_pj') }}">
+                                            name="jabatan_pj" value="{{ $hosting->jabatan_pj }}">
                                         @error('jabatan_pj')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -187,7 +187,7 @@
                                     <div class="form-group">
                                         <label for="no_telp_pj">no telp</label>
                                         <input type="number" class="form-control @error('no_telp_pj') is-invalid @enderror" id="no_telp_pj"
-                                            name="no_telp_pj" value="{{ old('no_telp_pj') }}">
+                                            name="no_telp_pj" value="{{ $hosting->no_telp_pj }}">
                                         @error('no_telp_pj')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -199,7 +199,7 @@
                                     <div class="form-group">
                                         <label for="email_pj">Email</label>
                                         <input type="email" class="form-control @error('email_pj') is-invalid @enderror" id="email_pj"
-                                            name="email_pj" value="{{ old('email_pj') }}">
+                                            name="email_pj" value="{{ $hosting->email_pj }}">
                                         @error('email_pj')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
