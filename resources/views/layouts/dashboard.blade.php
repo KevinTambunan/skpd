@@ -200,7 +200,7 @@
                         <span>Hosting</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/modul">
+                    <a class="nav-link" href="/aduan_verifikator">
                         {{-- <i class="fas fa-fw fa-table"></i> --}}
                         <i class="fa-fw fa-solid fa-network-wired"></i>
                         <span>Aduan Jaringan</span></a>
@@ -361,7 +361,7 @@
                     <span>Hosting</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/modul">
+                <a class="nav-link" href="/aduan">
                     {{-- <i class="fas fa-fw fa-table"></i> --}}
                     <i class="fa-fw fa-solid fa-network-wired"></i>
                     <span>Aduan Jaringan</span></a>

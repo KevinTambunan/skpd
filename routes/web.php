@@ -45,11 +45,15 @@ Route::middleware(['auth', 'verifikator'])->group(function () {
     Route::get('/hosting/setuju/{id}', [App\Http\Controllers\HostingController::class, 'setuju']);
     // Route::get('/hosting/ditolak/{id}', [App\Http\Controllers\HostingController::class, 'ditolak']);
     Route::post('/hosting/alasan/create/{id}', [App\Http\Controllers\HostingController::class, 'ditolak']);
-    
-    
+
+
     Route::get('/rekomendasi_verifikator', [App\Http\Controllers\RekomendasiController::class, 'index_verifikator']);
     Route::get('/rekomendasi/setuju/{id}', [App\Http\Controllers\RekomendasiController::class, 'setuju']);
     Route::post('/rekomendasi/alasan/create/{id}', [App\Http\Controllers\RekomendasiController::class, 'ditolak']);
+
+    Route::get('/aduan_verifikator', [App\Http\Controllers\AduanController::class, 'index_verifikator']);
+    Route::get('/aduan/setuju/{id}', [App\Http\Controllers\AduanController::class, 'setuju']);
+    Route::post('/aduan/alasan/create/{id}', [App\Http\Controllers\AduanController::class, 'ditolak']);
 
 });
 
@@ -76,4 +80,11 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/rekomendasi/edit/{id}', [App\Http\Controllers\RekomendasiController::class, 'edit']);
     Route::post('/rekomendasi/update/{id}', [App\Http\Controllers\RekomendasiController::class, 'update']);
     Route::get('/rekomendasi/hapus/{id}', [App\Http\Controllers\RekomendasiController::class, 'destroy']);
+
+    Route::get('/aduan', [App\Http\Controllers\AduanController::class, 'index']);
+    Route::get('/tambah_aduan', [App\Http\Controllers\AduanController::class, 'create']);
+    Route::post('/create_aduan', [App\Http\Controllers\AduanController::class, 'store']);
+    Route::get('/aduan/edit/{id}', [App\Http\Controllers\AduanController::class, 'edit']);
+    Route::post('/update_aduan/{id}', [App\Http\Controllers\AduanController::class, 'update']);
+    Route::get('/aduan/hapus/{id}', [App\Http\Controllers\AduanController::class, 'destroy']);
 });

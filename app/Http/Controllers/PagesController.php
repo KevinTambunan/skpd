@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Aduan;
 use App\Models\Aplikasi;
 use App\Models\Bank;
 use App\Models\Homestay;
@@ -59,13 +60,16 @@ class PagesController extends Controller
                 $hosting = count(Hosting::all());
                 // $aduanJaringan = count(::all());
                 $rekomendasi = count(Rekomendasi::all());
-                return view('verifikator.dashboard', compact(['users', 'aplikasi', 'hosting', 'rekomendasi']));
+                $aduan = count(Aduan::all());
+                return view('verifikator.dashboard', compact(['users', 'aplikasi', 'hosting', 'rekomendasi', 'aduan']));
             } else {
                 $aplikasi = count(Aplikasi::all());
                 $hosting = count(Hosting::all());
                 // $aduanJaringan = count(::all());
                 $rekomendasi = count(Rekomendasi::all());
-                return view('user.index', compact(['aplikasi', 'hosting', 'rekomendasi']));
+                $aduan = count(Aduan::all());
+
+                return view('user.index', compact(['aplikasi', 'hosting', 'rekomendasi', 'aduan']));
             }
         } else {
             return view('auth.login');
@@ -84,13 +88,17 @@ class PagesController extends Controller
             $hosting = count(Hosting::all());
             // $aduanJaringan = count(::all());
             $rekomendasi = count(Rekomendasi::all());
-            return view('verifikator.dashboard', compact(['users', 'aplikasi', 'hosting', 'rekomendasi']));
+            $aduan = count(Aduan::all());
+
+            return view('verifikator.dashboard', compact(['users', 'aplikasi', 'hosting', 'rekomendasi', 'aduan']));
         } else {
             $aplikasi = count(Aplikasi::all());
             $hosting = count(Hosting::all());
             // $aduanJaringan = count(::all());
             $rekomendasi = count(Rekomendasi::all());
-            return view('user.index', compact(['aplikasi', 'hosting', 'rekomendasi']));
+            $aduan = count(Aduan::all());
+
+            return view('user.index', compact(['aplikasi', 'hosting', 'rekomendasi', 'aduan']));
         }
     }
 

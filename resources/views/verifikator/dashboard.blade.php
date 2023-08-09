@@ -59,11 +59,11 @@
                                     </div>
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-auto">
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0%</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$aduan}}</div>
                                         </div>
                                         <div class="col">
                                             <div class="progress progress-sm mr-2">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 0%"
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: {{$aduan}}%"
                                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
@@ -131,6 +131,7 @@
         var aplikasi = {!! json_encode($aplikasi) !!};
         var rekomendasi = {!! json_encode($rekomendasi) !!};
         var hosting = {!! json_encode($hosting) !!};
+        var aduan = {!! json_encode($aduan) !!};
     </script>
-    
+
 @endsection
